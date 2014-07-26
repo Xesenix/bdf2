@@ -5,12 +5,12 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 $app = new Silex\Application(array(
 	'locale' => 'pl',
 	'debug' => true,
-	'projectName' => 'Black Dragon Framework 2',
+	'projectName' => 'Black Dragon Admin',
 ));
 
 // --- Registering modules ---
 
-// --- DB ---
+// -- DB ---
 
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 	'db.default_options' => array(
@@ -22,6 +22,14 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 ));
 
 $app->register(new BDF2\ORM\Provider\ORMServiceProvider());
+
+// --- Forms ---
+
+$app->register(new Silex\Provider\FormServiceProvider());
+$app->register(new Silex\Provider\ValidatorServiceProvider());
+$app->register(new Silex\Provider\TranslationServiceProvider(), array(
+    'translator.domains' => array(),
+));
 
 // --- View ---
 
@@ -36,8 +44,5 @@ $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 // --- Modules ---
 
-$app->register(new BDF2\Content\Provider\ContentServiceProvider(), array(
-	'content.root' => '/',
-));
-
+$app->register(new BDF2\Content\Provider\AdminContentServiceProvider());
 
