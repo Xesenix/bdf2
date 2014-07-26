@@ -1,1 +1,4 @@
 vendor
+cache
+app/admin/cache
+app/test/cache

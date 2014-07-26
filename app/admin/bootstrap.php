@@ -6,6 +6,7 @@ $app = new Silex\Application(array(
 	'locale' => 'pl',
 	'debug' => true,
 	'projectName' => 'Black Dragon Admin',
+	'date.default_format' => 'd/m/Y',
 ));
 
 // --- Registering modules ---
@@ -31,13 +32,18 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
     'translator.domains' => array(),
 ));
 
+$app->register(new BDF2\Form\Provider\FormServiceProvider());
+
 // --- View ---
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
 	'twig.path' => array(
 		__DIR__ . '/views',
 		__DIR__ . '/../views',
-	)
+	),
+	'twig.options' => array(
+		'cache' => __DIR__ . '/cache/twig',
+	),
 ));
 
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
