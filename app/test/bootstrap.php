@@ -2,9 +2,12 @@
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
+$debug = true;
+
 $app = new Silex\Application(array(
 	'locale' => 'pl',
-	'debug' => true,
+	'debug' => $debug,
+	'path.project' => __DIR__,
 	'projectName' => 'Black Dragon Framework 2',
 	'date.default_format' => 'd/m/Y',
 ));
@@ -37,6 +40,17 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 ));
 
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
+$app->register(new BDF2\Resources\Provider\ResourceServiceProvider(), array(
+	'resources.dev_mode' => $debug,
+));
+
+$app['resources.paths'] = $app->share($app->extend('resources.paths', function ($paths) {
+	$paths[] = __DIR__ . '/../resources';
+	$paths[] = __DIR__ . '/resources';
+	
+	return $paths;
+}));
 
 // --- Modules ---
 
