@@ -66,3 +66,9 @@ $app['resources.paths'] = $app->share($app->extend('resources.paths', function (
 
 $app->register(new BDF2\Content\Provider\AdminContentServiceProvider());
 
+$app->get('/', function() use($app) {
+	return $app['twig']->render('layout.html', array(
+		'pageTitle' => 'Tablica CMS',
+	));
+})->bind('home');
+

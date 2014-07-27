@@ -1,0 +1,40 @@
+.hero {
+	width: 100%;
+	height: 100px;
+	color: #fff;
+	background: #346bca url(../assets/hero_bg.png) repeat-x left top;
+}
+
+.hero .logo {
+	display: block;
+	margin: 0 20px 0 0;
+	float: left;
+}
+
+.hero .page-title {
+	overflow: hidden;
+}
+
+.top-bar {
+	width: 100%;
+	height: 40px;
+	background: #000 url('../assets/bar_bg.png') repeat-x left top;
+	color: #fff;
+}
+
+.top-bar ul.menu > li {
+	display: inline-block;
+	height: 40px
+}
+
+.top-bar ul.menu > li:hover {
+	background: url('../assets/bar_bg_highlight.png') repeat-x left top;
+}
+
+.top-bar ul.menu a {
+	display: block;
+	padding: 8px 16px;
+	color: #fff;
+	text-decoration: none;
+	line-height: 24px;
+}

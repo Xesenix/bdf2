@@ -3,28 +3,37 @@
 <head>
 	{% block head %}
 		<meta content="UTF-8"/>
-		<title>{% block title %}{{ [pageTitle,app.projectName]|join(' - ') }}{% endblock %}</title>
-		<link rel="stylesheet" href="{{ path('css', { file: 'reset.css' }) }}" type="text/css" media="screen"/>
+		<title>{% block title %}{{ [pageTitle|default('Strona'), app.projectName]|join(' - ') }}{% endblock %}</title>
+		<link rel="stylesheet" href="{{ path('css', { file: 'reset.css' }) }}" type="text/css" media="screen">
+		<link rel="stylesheet" href="{{ path('css', { file: 'typography.css' }) }}" type="text/css" media="screen">
+		<link rel="stylesheet" href="{{ path('css', { file: 'layout.css' }) }}" type="text/css" media="screen">
 	{% endblock %}
 </head>
 <body>
-	{% block navigation %}
-	<nav>
-		<ul>
-			<li>
-				<a href="{{ url('articles') }}">Artykuły</a>
-			</li>
-		</ul>
-	</nav>
-	{% endblock %}
 	{% block hero %}
 	<div class="hero">
 		<div class="wrapper">
 			{% block heroContent %}
-				<h1>{{ pageTitle }}</h1>
-				<h2>{{ app.projectName }}</h2>
+				<a class="logo" href="{{ path('home') }}"><img src="{{ path('asset', { file: 'assets/logo.png' }) }}" alt="{{ app.projectName }}"/></a>
+				<div class="page-title">
+					<h1>{{ pageTitle }}</h1>
+					<h2>{{ app.projectName }}</h2>
+				</div>
 			{% endblock %}
 		</div>
+	</div>
+	{% endblock %}
+	{% block navigation %}
+	<div class="top-bar">
+		<div class="wrapper">
+			<nav>
+				<ul class="menu">
+					<li>
+						<a href="{{ url('articles') }}">Artykuły</a>
+					</li>
+				</ul>
+			</nav>
+		</div>	
 	</div>
 	{% endblock %}
 	{% block main %}
@@ -46,7 +55,7 @@
 	</div>
 	{% endblock %}
 	{% block bottomScripts %}
-		<script src="{{ app.request.basepath }}/js/core.js" type="text/javascript" charset="utf-8"></script>
+		<script src="{{ path('js', { file: 'core.js' }) }}" type="text/javascript" charset="utf-8"></script>
 	{% endblock %}
 </body>
 </html>

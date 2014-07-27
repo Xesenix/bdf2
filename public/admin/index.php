@@ -6,4 +6,4 @@ $app['path.root'] = __DIR__;
 
 $start = microtime(true);
 $app->run();
-var_dump(microtime(true) - $start);
+//var_dump(microtime(true) - $start);

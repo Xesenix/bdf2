@@ -4,6 +4,8 @@
 	{% block head %}
 		<meta content="UTF-8"/>
 		<title>{% block title %}{{ [pageTitle,app.projectName]|join(' - ') }}{% endblock %}</title>
+		<link rel="stylesheet" href="{{ path('css', { file: 'reset.css' }) }}" type="text/css" media="screen">
+		<link rel="stylesheet" href="{{ path('css', { file: 'typography.css' }) }}" type="text/css" media="screen">
 	{% endblock %}
 </head>
 <body>
@@ -45,7 +47,7 @@
 	</div>
 	{% endblock %}
 	{% block bottomScripts %}
-		<script src="{{ app.request.basepath }}/js/core.js" type="text/javascript" charset="utf-8"></script>
+		<script src="{{ path('js', { file: 'core.js' }) }}" type="text/javascript" charset="utf-8"></script>
 	{% endblock %}
 </body>
 </html>

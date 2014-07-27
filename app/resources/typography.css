@@ -1,0 +1,185 @@
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+}
+
+h1 {
+	font-size: 18pt;
+	font-weight: bold;
+	margin-bottom: 8pt;
+}
+
+h2 {
+	font-size: 17pt;
+	margin-top: 15pt;
+	margin-bottom: 8pt;
+}
+
+h3 {
+	font-size: 14pt;
+	margin-top: 8pt;
+	margin-bottom: 5pt;
+}
+
+h4 {
+	font-size: 13pt;
+	margin-top: 5pt;
+	margin-bottom: 5pt;
+}
+
+h5 {
+	font-size: 12pt;
+	font-weight: bold;
+	margin-bottom: 4pt;
+}
+
+h6 {
+	font-size: 12pt;
+	font-weight: bold;
+}
+
+h1 img,
+h2 img,
+h3 img,
+h4 img,
+h5 img,
+h6 img {
+	margin:0;
+}
+
+p {
+	margin: 0 0 4pt;
+}
+
+.left {
+	float: left !important;
+}
+p .left {
+	margin: 20px 20px 20px 0;
+	padding: 0;
+}
+
+.right {
+	float: right !important;
+}
+
+p .right {
+	margin: 20px 0 20px 20px;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+blockquote {
+	margin: 20px;
+	color: #666;
+	font-style: italic;
+}
+
+strong, dfn {
+	font-weight: bold;
+}
+
+em, 
+dfn {
+	font-style: italic;
+}
+	
+
+sup, sub {
+	line-height: 0;
+}
+
+abbr,
+acronym {
+	border-bottom: 1px dotted #666;
+}
+
+address {
+	margin: 0 0 20px;
+	font-style: italic;
+}
+
+del {
+	color: #666;
+}
+
+pre {
+	margin: 1.5em 0;
+	white-space: pre;
+}
+
+pre, code, tt {
+	font: 12pt 'andale mono', 'lucida console', monospace;
+	line-height: 1.5;
+}
+
+li ul,
+li ol {
+	margin: 0;
+}
+
+ul, ol {
+	margin: 0 0 4pt;
+	padding-left: 20px;
+}
+
+ul {
+	list-style-type: disc;
+}
+
+ol {
+	list-style-type: decimal;
+}
+
+dl {
+	margin: 0 0 20px 0;
+}
+
+dl dt {
+	font-weight: bold;
+}
+
+dd {
+	margin-left: 20px;
+}
+
+table {
+	margin: 0 0 20px 0;
+	width: 100%;
+}
+
+th {
+	font-weight: bold;
+}
+
+thead th {
+	background: #000;
+	color: #fff;
+}
+
+tbody th {
+	background: #000;
+	color: #fff;
+}
+
+th, td {
+	padding: 4px 5px;
+}
+
+caption {
+	padding: 0;
+}
+
+tbody tr.odd td {
+	background-color: #000;
+}
+
+tfoot {
+	font-style: italic;
+}
+
+.small {
+	font-size: 0.8em;
+}
