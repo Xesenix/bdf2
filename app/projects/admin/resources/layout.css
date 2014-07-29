@@ -13,6 +13,20 @@
 
 .hero .page-title {
 	overflow: hidden;
+	color: #000;
+}
+
+.hero .page-title h1 {
+	margin: 10pt 0 8pt;
+	font-size: 24pt;
+	line-height: 1.2em;
+	color: #fff;
+	text-shadow: 1px 1px 3px #000;
+}
+
+.hero .page-title h2 {
+	margin: 8pt 0;
+	line-height: 1.2em;
 }
 
 .top-bar {

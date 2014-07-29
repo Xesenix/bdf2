@@ -14,7 +14,7 @@
 	<div class="hero">
 		<div class="wrapper">
 			{% block heroContent %}
-				<a class="logo" href="{{ path('home') }}"><img src="{{ path('asset', { file: 'assets/logo.png' }) }}" alt="{{ app.projectName }}"/></a>
+				<a class="logo" href="{{ app.request.getBasePath() }}"><img src="{{ path('asset', { file: 'assets/logo.png' }) }}" alt="{{ app.projectName }}"/></a>
 				<div class="page-title">
 					<h1>{{ pageTitle }}</h1>
 					<h2>{{ app.projectName }}</h2>
@@ -28,6 +28,9 @@
 		<div class="wrapper">
 			<nav>
 				<ul class="menu">
+					<li>
+						<a href="{{ url('module:dashboard') }}">Moduły</a>
+					</li>
 					<li>
 						<a href="{{ url('articles') }}">Artykuły</a>
 					</li>

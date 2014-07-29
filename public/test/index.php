@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../../app/test/bootstrap.php';
+require_once __DIR__ . '/../../app/projects/test/bootstrap.php';
 
 $app['path.root'] = __DIR__;
 
