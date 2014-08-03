@@ -1,9 +1,10 @@
 <?php
 use BDF2\Content\Entity\Article;
+use BDF2\Module\Entity\Module;
 
 require_once 'bootstrap.php';
 
-$entityManager = $app['em'];
+$entityManager = $app['orm.em'];
 
 $article = new Article();
 $article
@@ -14,4 +15,12 @@ $article
 	->setDate(new DateTime('2012-01-12'));
 
 $entityManager->persist($article);
+
+$module = new Module();
+$module->name = 'Test sidebar';
+$module->position = 'sidebar';
+$module->content = 'TEST SIDEBAR';
+
+$entityManager->persist($module);
+
 $entityManager->flush();

@@ -67,9 +67,11 @@ $app['resources.paths'] = $app->share($app->extend('resources.paths', function (
 }));
 
 // --- Modules ---
-
-$app->register(new BDF2\Module\Provider\ModuleServiceProvider(), array(
-	'module.routes.prefix' => '/',
+$app->register(new BDF2\Module\Provider\AdminModuleServiceProvider(), array(
+	'module.routes.admin_prefix' => '/',
 ));
+$app->register(new BDF2\Module\Provider\ModuleServiceProvider());
 
 $app->register(new BDF2\Content\Provider\AdminContentServiceProvider());
+$app->register(new BDF2\JQuery\Provider\JQueryServiceProvider());
+$app->register(new BDF2\TinyMCE\Provider\TinyMceServiceProvider());

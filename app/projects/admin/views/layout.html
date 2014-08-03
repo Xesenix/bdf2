@@ -4,9 +4,9 @@
 	{% block head %}
 		<meta content="UTF-8"/>
 		<title>{% block title %}{{ [pageTitle|default('Strona'), app.projectName]|join(' - ') }}{% endblock %}</title>
-		<link rel="stylesheet" href="{{ path('css', { file: 'reset.css' }) }}" type="text/css" media="screen">
-		<link rel="stylesheet" href="{{ path('css', { file: 'typography.css' }) }}" type="text/css" media="screen">
-		<link rel="stylesheet" href="{{ path('css', { file: 'layout.css' }) }}" type="text/css" media="screen">
+		<link rel="stylesheet" href="{{ path('resource:css', { file: 'css/reset.css' }) }}" type="text/css" media="screen">
+		<link rel="stylesheet" href="{{ path('resource:css', { file: 'css/typography.css' }) }}" type="text/css" media="screen">
+		<link rel="stylesheet" href="{{ path('resource:css', { file: 'css/layout.css' }) }}" type="text/css" media="screen">
 	{% endblock %}
 </head>
 <body>
@@ -14,7 +14,7 @@
 	<div class="hero">
 		<div class="wrapper">
 			{% block heroContent %}
-				<a class="logo" href="{{ app.request.getBasePath() }}"><img src="{{ path('asset', { file: 'assets/logo.png' }) }}" alt="{{ app.projectName }}"/></a>
+				<a class="logo" href="{{ app.request.getBasePath() }}"><img src="{{ path('resource:asset', { file: 'assets/logo.png' }) }}" alt="{{ app.projectName }}"/></a>
 				<div class="page-title">
 					<h1>{{ pageTitle }}</h1>
 					<h2>{{ app.projectName }}</h2>
@@ -29,22 +29,30 @@
 			<nav>
 				<ul class="menu">
 					<li>
-						<a href="{{ url('module:dashboard') }}">Moduły</a>
+						<a href="{{ url('module:admin:dashboard') }}">Moduły</a>
 					</li>
 					<li>
 						<a href="{{ url('articles') }}">Artykuły</a>
 					</li>
 				</ul>
 			</nav>
+			{{ render(url('module:position', { position: 'topbar'})) }}
 		</div>	
 	</div>
 	{% endblock %}
 	{% block main %}
 	<div class="main">
 		<div class="wrapper">
-		{% block mainContent %}
-			Test content
-		{% endblock %}
+			<div class="row">
+				<div class="col">
+					{{ render(url('module:position', { position: 'sidebar'})) }}
+				</div>
+				<div class="col">
+					{% block mainContent %}
+						
+					{% endblock %}
+				</div>
+			</div>
 		</div>
 	</div>
 	{% endblock %}
@@ -52,13 +60,17 @@
 	<div class="footer">
 		<div class="wrapper">
 			{% block footerContent %}
+				{{ render(url('module:position', { position: 'footer'})) }}
 				2009-{{ 'now'|date('Y') }} &copy; Paweł Kapalla, Xesenix
 			{% endblock %} 
 		</div>
 	</div>
 	{% endblock %}
 	{% block bottomScripts %}
-		<script src="{{ path('js', { file: 'core.js' }) }}" type="text/javascript" charset="utf-8"></script>
+		<script src="{{ path('resource:js', { file: 'js/jquery/jquery.js' }) }}" type="application/javascript" charset="utf-8"></script>
+		<script src="{{ path('resource:js', { file: 'js/tinymce/tinymce.min.js' }) }}" type="application/javascript" charset="utf-8"></script>
+		<script src="{{ path('resource:js', { file: 'js/core.js' }) }}" type="application/javascript" charset="utf-8"></script>
+		
 	{% endblock %}
 </body>
 </html>

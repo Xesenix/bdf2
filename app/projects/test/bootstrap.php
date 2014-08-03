@@ -57,7 +57,7 @@ $app['resources.paths'] = $app->share($app->extend('resources.paths', function (
 // --- Modules ---
 
 $app->register(new BDF2\Content\Provider\ContentServiceProvider(), array(
-	'routes.content' => '/',
+	'content.routes.prefix' => '/',
 ));
 
 
