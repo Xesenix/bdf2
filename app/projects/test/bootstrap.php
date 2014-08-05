@@ -44,7 +44,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 $app->register(new BDF2\Resources\Provider\ResourceServiceProvider(), array(
-	'resources.dev_mode' => $debug,
+	'resources.asset.publish_mode' => !$debug,
 ));
 
 $app['resources.paths'] = $app->share($app->extend('resources.paths', function ($paths) {

@@ -1,5 +1,4 @@
-tinymce.init({
-    selector: "textarea",
+jQuery('textarea').tinymce({
     plugins: [
         "advlist autolink lists link image charmap print preview anchor",
         "searchreplace visualblocks code fullscreen",

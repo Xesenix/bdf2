@@ -1,5 +1,5 @@
 <?php
-
+// off-format
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 $debug = true;
@@ -17,7 +17,6 @@ $app = new Silex\Application(array(
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 
 // -- DB ---
-
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 	'db.default_options' => array(
 		'driver'   => 'pdo_mysql',
@@ -56,10 +55,12 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 $app->register(new BDF2\Resources\Provider\ResourceServiceProvider(), array(
-	'resources.dev_mode' => $debug,
+	'resources.asset.publish_mode' => !$debug,
 ));
 
 $app['resources.paths'] = $app->share($app->extend('resources.paths', function ($paths) {
+	$paths[] = __DIR__ . '/../../../vendor/resources';
+	$paths[] = __DIR__ . '/../../../vendor/resources/js/tinymce';
 	$paths[] = __DIR__ . '/../../resources';
 	$paths[] = __DIR__ . '/resources';
 	
@@ -73,5 +74,3 @@ $app->register(new BDF2\Module\Provider\AdminModuleServiceProvider(), array(
 $app->register(new BDF2\Module\Provider\ModuleServiceProvider());
 
 $app->register(new BDF2\Content\Provider\AdminContentServiceProvider());
-$app->register(new BDF2\JQuery\Provider\JQueryServiceProvider());
-$app->register(new BDF2\TinyMCE\Provider\TinyMceServiceProvider());

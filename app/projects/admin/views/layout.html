@@ -67,8 +67,9 @@
 	</div>
 	{% endblock %}
 	{% block bottomScripts %}
-		<script src="{{ path('resource:js', { file: 'js/jquery/jquery.js' }) }}" type="application/javascript" charset="utf-8"></script>
+		<script src="{{ path('resource:js', { file: 'js/jquery/jquery-1.11.1.min.js' }) }}" type="application/javascript" charset="utf-8"></script>
 		<script src="{{ path('resource:js', { file: 'js/tinymce/tinymce.min.js' }) }}" type="application/javascript" charset="utf-8"></script>
+		<script src="{{ path('resource:js', { file: 'js/tinymce/jquery.tinymce.min.js' }) }}" type="application/javascript" charset="utf-8"></script>
 		<script src="{{ path('resource:js', { file: 'js/core.js' }) }}" type="application/javascript" charset="utf-8"></script>
 		
 	{% endblock %}
