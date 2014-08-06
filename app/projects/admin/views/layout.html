@@ -4,9 +4,7 @@
 	{% block head %}
 		<meta content="UTF-8"/>
 		<title>{% block title %}{{ [pageTitle|default('Strona'), app.projectName]|join(' - ') }}{% endblock %}</title>
-		<link rel="stylesheet" href="{{ path('resource:css', { file: 'css/reset.css' }) }}" type="text/css" media="screen">
-		<link rel="stylesheet" href="{{ path('resource:css', { file: 'css/typography.css' }) }}" type="text/css" media="screen">
-		<link rel="stylesheet" href="{{ path('resource:css', { file: 'css/layout.css' }) }}" type="text/css" media="screen">
+		<link rel="stylesheet" href="{{ path('resource:css', { file: 'css/admin.css' }) }}" type="text/css" media="screen">
 	{% endblock %}
 </head>
 <body>

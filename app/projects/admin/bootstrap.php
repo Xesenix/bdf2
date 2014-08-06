@@ -7,6 +7,7 @@ $app = new Silex\Application(array(
 	'locale' => 'pl',
 	'debug' => $debug,
 	'project_dir' => __DIR__,
+	'tmp_dir' => __DIR__ . '/../../tmp',
 	'projectName' => 'Black Dragon Admin - administracja stroną testową',
 	'date.default_format' => 'd/m/Y',
 ));
@@ -65,6 +66,16 @@ $app['resources.assets.resource_dir'] = $app->share($app->extend('resources.asse
 	$paths[] = __DIR__ . '/resources';
 	
 	return $paths;
+}));
+
+$app['resources.assets.compositions'] = $app->share($app->extend('resources.assets.compositions', function ($compositions) {
+	$compositions['css/admin.css'] = array(
+		'css/reset.css',
+		'css/typography.css',
+		'css/layout.css',
+	);
+	
+	return $compositions;
 }));
 
 // --- Modules ---
