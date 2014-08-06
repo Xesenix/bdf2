@@ -1,5 +1,4 @@
 <?php
-// off-format
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
 $debug = true;
@@ -7,7 +6,7 @@ $debug = true;
 $app = new Silex\Application(array(
 	'locale' => 'pl',
 	'debug' => $debug,
-	'path.project' => __DIR__,
+	'project_dir' => __DIR__,
 	'projectName' => 'Black Dragon Admin - administracja stroną testową',
 	'date.default_format' => 'd/m/Y',
 ));
@@ -17,6 +16,7 @@ $app = new Silex\Application(array(
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 
 // -- DB ---
+
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 	'db.default_options' => array(
 		'driver'   => 'pdo_mysql',
@@ -55,12 +55,12 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 $app->register(new BDF2\Resources\Provider\ResourceServiceProvider(), array(
-	'resources.asset.publish_mode' => !$debug,
+	'resources.assets.publish_mode' => !$debug,
 ));
 
-$app['resources.paths'] = $app->share($app->extend('resources.paths', function ($paths) {
+$app['resources.assets.resource_dir'] = $app->share($app->extend('resources.assets.resource_dir', function ($paths) {
 	$paths[] = __DIR__ . '/../../../vendor/resources';
-	$paths[] = __DIR__ . '/../../../vendor/resources/js/tinymce';
+	$paths[] = __DIR__ . '/../../../vendor/resources/js/tinymce'; // for simplifing public path
 	$paths[] = __DIR__ . '/../../resources';
 	$paths[] = __DIR__ . '/resources';
 	
@@ -68,6 +68,7 @@ $app['resources.paths'] = $app->share($app->extend('resources.paths', function (
 }));
 
 // --- Modules ---
+
 $app->register(new BDF2\Module\Provider\AdminModuleServiceProvider(), array(
 	'module.routes.admin_prefix' => '/',
 ));

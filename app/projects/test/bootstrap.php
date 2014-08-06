@@ -7,7 +7,7 @@ $debug = true;
 $app = new Silex\Application(array(
 	'locale' => 'pl',
 	'debug' => $debug,
-	'path.project' => __DIR__,
+	'project_dir' => __DIR__,
 	'projectName' => 'Black Dragon Framework 2',
 	'date.default_format' => 'd/m/Y',
 ));
@@ -32,10 +32,12 @@ $app->register(new BDF2\ORM\Provider\ORMServiceProvider());
 // --- View ---
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-	'twig.path' => array(
-		__DIR__ . '/views',
-		__DIR__ . '/../../views',
-	),
+	'twig.path' => $app->share(function() {
+		return array(
+			__DIR__ . '/views',
+			__DIR__ . '/../../views',
+		);
+	}),
 	'twig.options' => array(
 		'cache' => __DIR__ . '/cache/twig',
 	),
@@ -44,10 +46,10 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 
 $app->register(new BDF2\Resources\Provider\ResourceServiceProvider(), array(
-	'resources.asset.publish_mode' => !$debug,
+	'resources.assets.publish_mode' => !$debug,
 ));
 
-$app['resources.paths'] = $app->share($app->extend('resources.paths', function ($paths) {
+$app['resources.assets.resource_dir'] = $app->share($app->extend('resources.assets.resource_dir', function ($paths) {
 	$paths[] = __DIR__ . '/../../resources';
 	$paths[] = __DIR__ . '/resources';
 	

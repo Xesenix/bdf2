@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../app/projects/test/bootstrap.php';
 
-$app['path.root'] = __DIR__;
+$app['public_dir'] = __DIR__;
 
 $start = microtime(true);
 $app->run();
