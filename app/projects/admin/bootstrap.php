@@ -7,7 +7,6 @@ $app = new Silex\Application(array(
 	'locale' => 'pl',
 	'debug' => $debug,
 	'project_dir' => __DIR__,
-	'tmp_dir' => __DIR__ . '/../../tmp',
 	'projectName' => 'Black Dragon Admin - administracja stroną testową',
 	'date.default_format' => 'd/m/Y',
 ));
@@ -73,6 +72,15 @@ $app['resources.assets.compositions'] = $app->share($app->extend('resources.asse
 		'css/reset.css',
 		'css/typography.css',
 		'css/layout.css',
+	);
+	// tinymce needs its composition file to be located in tinymce folder or rewrite root for its plugins
+	$compositions['js/tinymce/tinymce.min.js'] = array(
+		'js/tinymce/tinymce.min.js',
+		'js/tinymce/jquery.tinymce.min.js',
+	);
+	
+	$compositions['js/jquery/jquery.js'] = array(
+		'js/jquery/jquery-1.11.1.min.js',
 	);
 	
 	return $compositions;

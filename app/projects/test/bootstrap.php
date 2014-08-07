@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../../vendor/autoload.php';
 
-$debug = true;
+$debug = false;
 
 $app = new Silex\Application(array(
 	'locale' => 'pl',
@@ -50,10 +50,26 @@ $app->register(new BDF2\Resources\Provider\ResourceServiceProvider(), array(
 ));
 
 $app['resources.assets.resource_dir'] = $app->share($app->extend('resources.assets.resource_dir', function ($paths) {
+	$paths[] = __DIR__ . '/../../../vendor/resources';
 	$paths[] = __DIR__ . '/../../resources';
 	$paths[] = __DIR__ . '/resources';
 	
 	return $paths;
+}));
+
+$app['resources.assets.compositions'] = $app->share($app->extend('resources.assets.compositions', function ($compositions) {
+	$compositions['css/page.css'] = array(
+		'css/reset.css',
+		'css/typography.css',
+		'css/layout.css',
+	);
+	
+	$compositions['js/core.js'] = array(
+		'js/jquery/jquery-1.11.1.min.js',
+		'js/core.js',
+	);
+	
+	return $compositions;
 }));
 
 // --- Modules ---

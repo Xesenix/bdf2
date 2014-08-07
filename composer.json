@@ -63,6 +63,8 @@
 		"symfony/translation": "~2.3",
 		"symfony/locale": "~2.3",
 		"symfony/security-csrf": "~2.4",
+		"kriswallsmith/assetic" : "~1.1",
+		"natxet/CssMin": "~3",
 		"resources/js/jquery": "1.11.*",
 		"resources/js/jquery-ui": "1.11.*",
 		"resources/js/tinymce": "4.*"

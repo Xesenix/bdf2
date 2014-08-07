@@ -4,8 +4,9 @@
 	{% block head %}
 		<meta content="UTF-8"/>
 		<title>{% block title %}{{ [pageTitle,app.projectName]|join(' - ') }}{% endblock %}</title>
-		<link rel="stylesheet" href="{{ path('resource:css', { file: 'css/reset.css' }) }}" type="text/css" media="screen">
-		<link rel="stylesheet" href="{{ path('resource:css', { file: 'css/typography.css' }) }}" type="text/css" media="screen">
+		{% for file in ['css/page.css'] %}
+		<link rel="stylesheet" href="{{ path('resource:css', { file: file }) }}" type="text/css" media="screen">
+		{% endfor %}
 	{% endblock %}
 </head>
 <body>
@@ -47,7 +48,9 @@
 	</div>
 	{% endblock %}
 	{% block bottomScripts %}
-		<script src="{{ path('resource:js', { file: 'js/core.js' }) }}" type="text/javascript" charset="utf-8"></script>
+		{% for file in ['js/core.js'] %}
+		<script src="{{ path('resource:js', { file: file }) }}" type="application/javascript" charset="utf-8"></script>
+		{% endfor %}
 	{% endblock %}
 </body>
 </html>
