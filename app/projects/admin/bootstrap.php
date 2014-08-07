@@ -91,6 +91,9 @@ $app['resources.assets.compositions'] = $app->share($app->extend('resources.asse
 $app->register(new BDF2\Module\Provider\AdminModuleServiceProvider(), array(
 	'module.routes.admin_prefix' => '/',
 ));
-$app->register(new BDF2\Module\Provider\ModuleServiceProvider());
+
+$app->register(new BDF2\Navigation\Provider\AdminNavigationServiceProvider());
 
 $app->register(new BDF2\Content\Provider\AdminContentServiceProvider());
+
+$app->register(new BDF2\Module\Provider\ModuleServiceProvider());

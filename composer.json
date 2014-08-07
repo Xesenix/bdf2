@@ -56,7 +56,7 @@
 		"twig/twig": ">=1.8,<2.0-dev",
 		"symfony/twig-bridge": "~2.3",
 		"doctrine/orm": "2.4.*",
-		"symfony/form": "~2.3",
+		"symfony/form": "2.5.2",
 		"symfony/finder": "2.3.*",
 		"symfony/validator": "~2.3",
 		"symfony/config": "dev-master as 2.5.x-dev",
