@@ -29,10 +29,10 @@
 			<nav>
 				<ul class="menu">
 					<li>
-						<a href="{{ url('module:admin:dashboard') }}">Moduły</a>
+						<a href="{{ url('module:admin:module:list') }}">Moduły</a>
 					</li>
 					<li>
-						<a href="{{ url('articles') }}">Artykuły</a>
+						<a href="{{ url('content:admin:article:list') }}">Artykuły</a>
 					</li>
 					<li>
 						<a href="{{ url('navigation:admin:menu:list') }}">Menu</a>
@@ -45,15 +45,15 @@
 	{% endblock %}
 	{% block main %}
 	<div class="main">
-		<div class="wrapper">
+		<div class="wrapper container-fluid">
 			<div class="row">
-				<div class="col">
-					{{ render(url('module:position', { position: 'sidebar'})) }}
-				</div>
-				<div class="col">
+				<div class="col-xs-9">
 					{% block mainContent %}
 						
 					{% endblock %}
+				</div>
+				<div class="col-xs-3">
+					{{ render(url('module:position', { position: 'sidebar'})) }}
 				</div>
 			</div>
 		</div>
@@ -61,10 +61,12 @@
 	{% endblock %}
 	{% block footer %}
 	<div class="footer">
-		<div class="wrapper">
+		<div class="wrapper container-fluid">
 			{% block footerContent %}
-				{{ render(url('module:position', { position: 'footer'})) }}
-				2009-{{ 'now'|date('Y') }} &copy; Paweł Kapalla, Xesenix
+				<div class="row">{{ render(url('module:position', { position: 'footer', 'box-class': 'col-xs-3', 'header-level': 3 })) }}</div>
+				<div class="row">
+					<div class="col-xs-12 text-right">2009-{{ 'now'|date('Y') }} &copy; Paweł Kapalla, Xesenix</div>
+				</div>
 			{% endblock %} 
 		</div>
 	</div>

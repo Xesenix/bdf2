@@ -36,8 +36,6 @@ $app->register(new Silex\Provider\TranslationServiceProvider(), array(
     'translator.domains' => array(),
 ));
 
-$app->register(new BDF2\Form\Provider\FormServiceProvider());
-
 // --- View ---
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
@@ -50,6 +48,9 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 	'twig.options' => array(
 		'cache' => __DIR__ . '/cache/twig',
 	),
+	'twig.form.templates' => array(
+		'form_div_layout.html',
+	),
 ));
 
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
@@ -59,8 +60,10 @@ $app->register(new BDF2\Resources\Provider\ResourceServiceProvider(), array(
 ));
 
 $app['resources.assets.resource_dir'] = $app->share($app->extend('resources.assets.resource_dir', function ($paths) {
-	$paths[] = __DIR__ . '/../../../vendor/resources';
-	$paths[] = __DIR__ . '/../../../vendor/resources/js/tinymce'; // for simplifing public path
+	$paths[] = __DIR__ . '/../../../vendor/resources/jquery';
+	$paths[] = __DIR__ . '/../../../vendor/resources/jquery-ui';
+	$paths[] = __DIR__ . '/../../../vendor/resources/tinymce';
+	$paths[] = __DIR__ . '/../../../vendor/resources/bootstrap';
 	$paths[] = __DIR__ . '/../../resources';
 	$paths[] = __DIR__ . '/resources';
 	
@@ -70,7 +73,9 @@ $app['resources.assets.resource_dir'] = $app->share($app->extend('resources.asse
 $app['resources.assets.compositions'] = $app->share($app->extend('resources.assets.compositions', function ($compositions) {
 	$compositions['css/admin.css'] = array(
 		'css/reset.css',
-		'css/typography.css',
+		//'css/typography.css',
+		'css/bootstrap.min.css',
+		'css/bootstrap-theme.min.css',
 		'css/layout.css',
 	);
 	// tinymce needs its composition file to be located in tinymce folder or rewrite root for its plugins
@@ -85,6 +90,8 @@ $app['resources.assets.compositions'] = $app->share($app->extend('resources.asse
 	
 	return $compositions;
 }));
+
+$app->register(new BDF2\Form\Provider\FormServiceProvider());
 
 // --- Modules ---
 

@@ -50,7 +50,9 @@ $app->register(new BDF2\Resources\Provider\ResourceServiceProvider(), array(
 ));
 
 $app['resources.assets.resource_dir'] = $app->share($app->extend('resources.assets.resource_dir', function ($paths) {
-	$paths[] = __DIR__ . '/../../../vendor/resources';
+	$paths[] = __DIR__ . '/../../../vendor/resources/jquery';
+	$paths[] = __DIR__ . '/../../../vendor/resources/jquery-ui';
+	$paths[] = __DIR__ . '/../../../vendor/resources/bootstrap';
 	$paths[] = __DIR__ . '/../../resources';
 	$paths[] = __DIR__ . '/resources';
 	
