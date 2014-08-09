@@ -2,3 +2,5 @@ vendor
 cache
 app/admin/cache
 app/test/cache
+/app/projects/admin/config/db.php
+/app/projects/test/config/db.php

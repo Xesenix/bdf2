@@ -8,6 +8,7 @@ $app = new Silex\Application(array(
 	'locale' => 'pl',
 	'debug' => $debug,
 	'project_dir' => __DIR__,
+	'vendor_dir' => __DIR__ . '/../../../vendor',
 	'projectName' => 'Black Dragon Framework 2',
 	'date.default_format' => 'd/m/Y',
 ));
@@ -19,12 +20,7 @@ $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 // --- DB ---
 
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
-	'db.default_options' => array(
-		'driver'   => 'pdo_mysql',
-	    'user'     => 'xesenix',
-	    'password' => '***REMOVED***',
-	    'dbname'   => 'test',
-    ),
+	'db.default_options' => include "config/db.php",
 ));
 
 $app->register(new BDF2\ORM\Provider\ORMServiceProvider());
