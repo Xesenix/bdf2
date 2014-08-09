@@ -16,9 +16,9 @@
 
 	"repositories": [
 		{
-            "type": "vcs",
-            "url": "https://github.com/Xesenix/Config"
-        }, {
+			"type": "vcs",
+			"url": "https://github.com/Xesenix/Config"
+		}, {
 			"type": "package",
 			"package": {
 				"name": "resources/jquery/js/jquery",
@@ -49,16 +49,16 @@
 				}
 			}
 		}, {
-            "type": "package",
-            "package": {
-                "name": "resources/bootstrap",
-                "version": "3.2.0",
-                "dist": {
-                    "url": "https://github.com/twbs/bootstrap/releases/download/v3.2.0/bootstrap-3.2.0-dist.zip",
-                    "type": "zip"
-                }
-            }
-        }
+			"type": "package",
+			"package": {
+				"name": "resources/bootstrap",
+				"version": "3.2.0",
+				"dist": {
+					"url": "https://github.com/twbs/bootstrap/releases/download/v3.2.0/bootstrap-3.2.0-dist.zip",
+					"type": "zip"
+				}
+			}
+		}
 	],
 
 	"require": {
@@ -74,11 +74,11 @@
 		"symfony/translation": "~2.3",
 		"symfony/locale": "~2.3",
 		"symfony/security-csrf": "~2.4",
-		"kriswallsmith/assetic" : "~1.1",
+		"kriswallsmith/assetic": "~1.1",
 		"natxet/CssMin": "~3",
 		"resources/jquery/js/jquery": "1.11.*",
 		"resources/jquery-ui/js/jquery-ui": "1.11.*",
-        "resources/bootstrap": "3.2.*",
+		"resources/bootstrap": "3.2.*",
 		"resources/tinymce": "4.*"
 	},
 

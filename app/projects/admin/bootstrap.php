@@ -91,12 +91,12 @@ $app->register(new BDF2\Form\Provider\FormServiceProvider());
 
 // --- Modules ---
 
-$app->register(new BDF2\Module\Provider\AdminModuleServiceProvider(), array(
-	'module.routes.admin_prefix' => '/',
+$app->register(new BDF2\Widget\Provider\AdminWidgetServiceProvider(), array(
+	'widgets.routes.admin_prefix' => '/',
 ));
 
 $app->register(new BDF2\Navigation\Provider\AdminNavigationServiceProvider());
 
 $app->register(new BDF2\Content\Provider\AdminContentServiceProvider());
 
-$app->register(new BDF2\Module\Provider\ModuleServiceProvider());
+$app->register(new BDF2\Widget\Provider\WidgetServiceProvider());
