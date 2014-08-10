@@ -1,3 +1,7 @@
+body {
+	background: #eaeaea url('../assets/main_bg.png') no-repeat center center;
+}
+
 .hero {
 	width: 100%;
 	height: 100px;
@@ -34,22 +38,31 @@
 	width: 100%;
 	height: 40px;
 	background: #000 url('../assets/bar_bg.png') repeat-x left top;
-	color: #fff;
 }
 
-.top-bar ul.menu > li {
-	display: inline-block;
-	height: 40px
-}
-
-.top-bar ul.menu > li:hover {
-	background: url('../assets/bar_bg_highlight.png') repeat-x left top;
-}
-
-.top-bar ul.menu a {
+.top-bar .nav > li > a,
+.top-bar .nav > li > button {
 	display: block;
 	padding: 8px 16px;
 	color: #fff;
 	text-decoration: none;
 	line-height: 24px;
+	box-shadow: none;
+	text-shadow: none;
+}
+
+.top-bar .nav > li > a:hover,
+.top-bar .nav > li > a:focus,
+.top-bar .nav > li.open > a,
+.top-bar .nav > li.open > button  {
+	background: url('../assets/bar_bg_highlight.png') repeat-x left top;
+}
+
+.top-bar .nav > li > .btn {
+	background: transparent;
+	border: none;
+}
+
+.main {
+	margin-top: 15px;
 }
