@@ -30,12 +30,18 @@
 		<div class="wrapper container-fluid">
 			<div class="row">
 				<nav class="col-xs-12">
-					<ul class="menu">
+					<ul class="nav nav-pills">
 						<li>
 							<a href="{{ url('widget:admin:widget:list') }}">Wihajstry</a>
 						</li>
-						<li>
-							<a href="{{ url('content_admin:article:list') }}">Artykuły</a>
+						<li class="btn-group">
+							<a class="btn" href="{{ url('article_admin:list') }}">Artykuły</a>
+							
+							<button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
+							
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="{{ url('article_admin:add') }}">Dodaj</a></li>
+							</ul>
 						</li>
 						<li>
 							<a href="{{ url('navigation:admin:menu:list') }}">Menu</a>

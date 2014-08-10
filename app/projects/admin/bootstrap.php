@@ -69,7 +69,7 @@ $app['resources.assets.resource_dir'] = $app->share($app->extend('resources.asse
 
 $app['resources.assets.compositions'] = $app->share($app->extend('resources.assets.compositions', function ($compositions) {
 	$compositions['css/admin.css'] = array(
-		'css/reset.css',
+		//'css/reset.css',
 		//'css/typography.css',
 		'css/bootstrap.min.css',
 		'css/bootstrap-theme.min.css',
