@@ -35,7 +35,7 @@
 							<a href="{{ url('widget:admin:widget:list') }}">Wihajstry</a>
 						</li>
 						<li>
-							<a href="{{ url('content:admin:article:list') }}">Artykuły</a>
+							<a href="{{ url('content_admin:article:list') }}">Artykuły</a>
 						</li>
 						<li>
 							<a href="{{ url('navigation:admin:menu:list') }}">Menu</a>
@@ -54,10 +54,8 @@
 				<div class="col-xs-9">
 					{% block mainContent %}
 						{% if message is defined %}
-						<div class="container-fluid">
-							<div class="alert alert-info" role="alert">
-							  <span class="glyphicon glyphicon-bell"></span> {{ message }}
-							</div>
+						<div class="alert alert-info" role="alert">
+							<span class="glyphicon glyphicon-bell"></span> {{ message }}
 						</div>
 						{% endif %}
 					{% endblock %}

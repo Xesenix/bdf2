@@ -106,3 +106,5 @@ $app->register(new BDF2\Navigation\Provider\AdminNavigationServiceProvider());
 $app->register(new BDF2\Content\Provider\AdminContentServiceProvider());
 
 $app->register(new BDF2\Widget\Provider\WidgetServiceProvider());
+
+$app['twig']->addGlobal('message', 'Test');
