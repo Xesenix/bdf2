@@ -30,7 +30,9 @@
 		<div class="wrapper container-fluid">
 			<div class="row">
 				<nav class="col-xs-12">
+					
 					<ul class="nav nav-pills">
+						{% if is_granted('ROLE_ADMIN') %}
 						<li>
 							<a href="{{ url('widget:admin:widget:list') }}">Wihajstry</a>
 						</li>
@@ -46,6 +48,12 @@
 						<li>
 							<a href="{{ url('navigation:admin:menu:list') }}">Menu</a>
 						</li>
+						{% endif %}
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+						<li class="pull-right">
+							<a href="{{ url('logout') }}">Logout</a>
+						</li>
+						{% endif %}
 					</ul>
 				</nav>
 				{{ render(url('widget:position', { position: 'topbar'})) }}
@@ -57,7 +65,7 @@
 	<div class="main">
 		<div class="wrapper container-fluid">
 			<div class="row">
-				<div class="col-xs-9">
+				<div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
 					{% block mainContent %}
 						{% if message is defined %}
 						<div class="alert alert-info" role="alert">
@@ -66,7 +74,7 @@
 						{% endif %}
 					{% endblock %}
 				</div>
-				<div class="col-xs-3">
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
 					{{ render(url('widget:position', { position: 'sidebar'})) }}
 				</div>
 			</div>

@@ -17,6 +17,10 @@ $app = new Silex\Application(array(
 
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 
+// -- Session --
+
+$app->register(new Silex\Provider\SessionServiceProvider());
+
 // -- DB ---
 
 $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
@@ -95,6 +99,40 @@ $app['resources.assets.compositions'] = $app->share($app->extend('resources.asse
 
 $app->register(new BDF2\Form\Provider\FormServiceProvider());
 
+// -- Security --
+
+$app->register(new Silex\Provider\SecurityServiceProvider(), array(
+    'security.firewalls' => array(
+    	'login' => array(
+	        'pattern' => '^/(login|resources.*)$',
+	        'anonymous' => true,
+	    ),
+	    'admin' => array(
+	        'pattern' => '^.+$',
+	        'form' => array(
+	        	'login_path' => '/login',
+				'check_path' => '/admin/login_check',
+			),
+	        'users' => array(
+	            'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
+	        ),
+	        'logout' => array(
+	        	'logout_path' => '/logout',
+                'target_url' => '/login',
+			),
+	    ),
+	),
+));
+
+$app->get('/login', function(Symfony\Component\HttpFoundation\Request $request) use ($app) {
+    return $app['twig']->render('login.html', array(
+        'error' => $app['security.last_error']($request),
+        'lastUsername' => $app['session']->get('_security.last_username'),
+        'pageTitle' => 'Login',
+    ));
+})
+->bind('login');
+
 // --- Modules ---
 
 $app->register(new BDF2\Widget\Provider\AdminWidgetServiceProvider(), array(
@@ -107,4 +145,4 @@ $app->register(new BDF2\Content\Provider\AdminContentServiceProvider());
 
 $app->register(new BDF2\Widget\Provider\WidgetServiceProvider());
 
-$app['twig']->addGlobal('message', 'Test');
+//$app['twig']->addGlobal('message', 'Test');
