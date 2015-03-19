@@ -42,9 +42,9 @@
 			"type": "package",
 			"package": {
 				"name": "resources/tinymce",
-				"version": "4.1.3",
+				"version": "4.1.9",
 				"dist": {
-					"url": "http://download.moxiecode.com/tinymce/tinymce_4.1.3_jquery.zip",
+					"url": "http://download.moxiecode.com/tinymce/tinymce_4.1.9_jquery.zip",
 					"type": "zip"
 				}
 			}
@@ -52,9 +52,19 @@
 			"type": "package",
 			"package": {
 				"name": "resources/bootstrap",
-				"version": "3.2.0",
+				"version": "3.3.4",
 				"dist": {
-					"url": "https://github.com/twbs/bootstrap/releases/download/v3.2.0/bootstrap-3.2.0-dist.zip",
+					"url": "https://github.com/twbs/bootstrap/releases/download/v3.3.4/bootstrap-3.3.4-dist.zip",
+					"type": "zip"
+				}
+			}
+		}, {
+			"type": "package",
+			"package": {
+				"name": "resources/vis",
+				"version": "3.11.0",
+				"dist": {
+					"url": "https://github.com/almende/vis/archive/v3.11.0.zip",
 					"type": "zip"
 				}
 			}
@@ -80,7 +90,9 @@
 		"resources/jquery/js/jquery": "1.11.*",
 		"resources/jquery-ui/js/jquery-ui": "1.11.*",
 		"resources/bootstrap": "3.2.*",
-		"resources/tinymce": "4.*"
+		"resources/tinymce": "4.*",
+		"resources/vis": "3.11.*",
+		"getninja/gravatar": "0.2.*"
 	},
 
 	"autoload": {

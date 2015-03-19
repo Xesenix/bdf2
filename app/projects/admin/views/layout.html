@@ -15,6 +15,11 @@
 		<div class="wrapper container-fluid">
 			<div class="row">
 				{% block heroContent %}
+					{% if app.security.token.user %}
+					<div class="pull-right">
+						<img class="" src="{{ avatar(app.security.token.user.username, 100) }}"/>
+					</div>
+					{% endif %}
 					<a class="logo" href="{{ app.request.getBasePath() }}"><img src="{{ path('resource:asset', { file: 'assets/logo.png' }) }}" alt="{{ app.projectName }}"/></a>
 					<div class="page-title">
 						<h1>{{ pageTitle }}</h1>

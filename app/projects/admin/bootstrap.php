@@ -102,34 +102,32 @@ $app->register(new BDF2\Form\Provider\FormServiceProvider());
 // -- Security --
 
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
-    'security.firewalls' => array(
-    	'login' => array(
-	        'pattern' => '^/(login|resources.*)$',
-	        'anonymous' => true,
-	    ),
-	    'admin' => array(
-	        'pattern' => '^.+$',
-	        'form' => array(
-	        	'login_path' => '/login',
+	'security.firewalls' => array(
+		'login' => array(
+			'pattern' => '^/(login|resources.*)$',
+			'anonymous' => true,
+		),
+		'admin' => array(
+			'pattern' => '^.+$',
+			'form' => array(
+				'login_path' => '/login',
 				'check_path' => '/admin/login_check',
 			),
-	        'users' => array(
-	            'admin' => array('ROLE_ADMIN', '5FZ2Z8QIkA7UTZ4BYkoC+GsReLf569mSKDsfods6LYQ8t+a8EW9oaircfMpmaLbPBh4FOBiiFyLfuZmTSUwzZg=='),
-	        ),
-	        'logout' => array(
-	        	'logout_path' => '/logout',
-                'target_url' => '/login',
+			'users' => include 'config/users.php',
+			'logout' => array(
+				'logout_path' => '/logout',
+				'target_url' => '/login',
 			),
-	    ),
+		),
 	),
 ));
 
 $app->get('/login', function(Symfony\Component\HttpFoundation\Request $request) use ($app) {
-    return $app['twig']->render('login.html', array(
-        'error' => $app['security.last_error']($request),
-        'lastUsername' => $app['session']->get('_security.last_username'),
-        'pageTitle' => 'Login',
-    ));
+	return $app['twig']->render('login.html', array(
+		'error' => $app['security.last_error']($request),
+		'lastUsername' => $app['session']->get('_security.last_username'),
+		'pageTitle' => 'Login',
+	));
 })
 ->bind('login');
 
@@ -144,5 +142,27 @@ $app->register(new BDF2\Navigation\Provider\AdminNavigationServiceProvider());
 $app->register(new BDF2\Content\Provider\AdminContentServiceProvider());
 
 $app->register(new BDF2\Widget\Provider\WidgetServiceProvider());
+
+$app->register(new BDF2\Avatar\Provider\AvatarServiceProvider());
+
+// Adding gravatar as avatar provider
+$app['helpers.gravatar'] = $app->share(function() use ($app) {
+	return new GetNinja\Gravatar\Gravatar();
+});
+
+$app['helpers.avatar.provider'] = $app->share($app->extend('helpers.avatar.provider', function ($provider) use($app) {
+	$provider->register(new BDF2\Avatar\Provider\AvatarCallbackProvider(function ($email, $size) use($app) {
+		$errors = $app['validator']->validateValue($email, new Symfony\Component\Validator\Constraints\Email());
+		
+		if (count($errors) == 0) 
+		{
+			return $app['helpers.gravatar']->getGravatar($email, $size);
+		}
+		
+		return null;
+	}, 0));
+	
+	return $provider;
+}));
 
 //$app['twig']->addGlobal('message', 'Test');
