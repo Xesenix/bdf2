@@ -34,7 +34,7 @@
 				"name": "resources/jquery-ui/js/jquery-ui",
 				"version": "1.11.0",
 				"dist": {
-					"url": "http://jqueryui.com//resources/download/jquery-ui-1.11.0.zip",
+					"url": "http://jqueryui.com/resources/download/jquery-ui-1.11.0.zip",
 					"type": "zip"
 				}
 			}
