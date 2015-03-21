@@ -1,0 +1,17 @@
+body {
+	padding: 50px 0 50px;
+}
+
+.navbar {
+	background: #000 url('../assets/bar_bg.png') repeat-x left top / 100% 50px;
+}
+
+.main {
+	padding-top: 20px;
+}
+
+.footer {
+	padding: 15px 0;
+	background: #000 url('../assets/bar_bg.png') repeat-x left bottom / 100% 100%;
+	color: #fff;
+}

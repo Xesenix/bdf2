@@ -1,9 +1,9 @@
 <!doctype html>
-<html>
+<html lang="pl">
 <head>
 	{% block head %}
 		<meta content="UTF-8"/>
-		<title>{% block title %}{{ [pageTitle,app.projectName]|join(' - ') }}{% endblock %}</title>
+		<title>{% block title %}{{ [pageTitle, app.projectName]|join(' - ') }}{% endblock %}</title>
 		{% for file in ['css/page.css'] %}
 		<link rel="stylesheet" href="{{ path('resource:css', { file: file }) }}" type="text/css" media="screen">
 		{% endfor %}
@@ -11,17 +11,33 @@
 </head>
 <body>
 	{% block navigation %}
-	<nav>
-		<ul>
-			<li>
-				<a href="{{ url('articles') }}">Artykuły</a>
-			</li>
-		</ul>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			{% block topMenu %}
+			<div class="navbar-header">
+				<button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				{% block menu %}
+				<ul class="nav navbar-nav">
+					{% for item in [{'route': 'articles', 'label': 'Artykuły'}, {'route': 'rpg', 'label': 'RPG'}] %}
+					<li{% if app.request.get('_route') == item.route or activItem is defined and activItem == item.route %} class="active"{% endif %}><a href="{{ url(item.route) }}">{{ item.label }}</a></li>
+					{% endfor %}
+				</ul>
+				{% endblock %}
+			</div>
+			{% endblock %}
+		</div>
 	</nav>
 	{% endblock %}
 	{% block hero %}
-	<div class="hero">
-		<div class="wrapper">
+	<div class="jumbotron hero">
+		<div class="container">
 			{% block heroContent %}
 				<h1>{{ pageTitle }}</h1>
 				<h2>{{ app.projectName }}</h2>
@@ -31,7 +47,7 @@
 	{% endblock %}
 	{% block main %}
 	<div class="main">
-		<div class="wrapper">
+		<div class="container">
 		{% block mainContent %}
 			Test content
 		{% endblock %}
@@ -39,13 +55,15 @@
 	</div>
 	{% endblock %}
 	{% block footer %}
-	<div class="footer">
-		<div class="wrapper">
-			{% block footerContent %}
-				2009-{{ 'now'|date('Y') }} &copy; Paweł Kapalla, Xesenix
-			{% endblock %} 
+	<footer class="navbar navbar-fixed-bottom footer">
+		<div class="container">
+			{% block footerContent -%}
+				<div class="row">
+					<div class="pull-right">&copy; Paweł Kapalla, <a href="http://xesenix.pl">Xesenix.pl</a> 2009-{{ 'now'|date('Y') }} </div>
+				</div>
+			{%- endblock %} 
 		</div>
-	</div>
+	</footer>
 	{% endblock %}
 	{% block bottomScripts %}
 		{% for file in ['js/core.js'] %}

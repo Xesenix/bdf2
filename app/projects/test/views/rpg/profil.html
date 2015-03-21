@@ -1,0 +1,22 @@
+{% extends "rpg/layout.html" %}
+{% block main %}
+	<div class="container">
+		<div class="col-xs-12 col-sm-3 sidebar">
+			<div class="list-group">
+				{% for item in [{'route': 'rpg:profil', 'label': 'Profil'}, {'route': 'rpg:inventory', 'label': 'Inwentarz', 'badge': '5'}, {'route': 'rpg:skills', 'label': 'Umiejętności', 'badge': '+3'}] %}
+					<a href="{{ url(item.route) }}" class="list-group-item {% if app.request.get('_route') == item.route %}active{% endif %}">
+						<span class="list-group-item-heading">{{ item.label }}</span>
+						{% if item.badge is defined %}<span class="badge">{{ item.badge }}</span>{% endif %}
+					</a>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="col-xs-12 col-sm-9 main">
+		<div ng-app="rpgApp" ng-controller="RpgController as rpg">
+			[[ rpg.label ]]
+		</div>
+			{{ dump(app.routes) }}
+		</div>
+	</div>
+{% endblock %}
+

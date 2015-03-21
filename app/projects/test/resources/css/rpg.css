@@ -1,0 +1,6 @@
+.hero {
+	height: 600px;
+	background: url(../assets/rpg_hero.jpg) no-repeat center center / cover;
+	color: #fff;
+	text-shadow: 1px 1px 5px #000;
+}

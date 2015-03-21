@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block head %}
+	<title>RPG</title>
+	{% for file in ['css/rpg.css'] %}
+	<link rel="stylesheet" href="{{ path('resource:css', { file: file }) }}" type="text/css" media="screen">
+	{% endfor %}
+{% endblock %}
+
+{% block bottomScripts %}
+	{% for file in ['js/rpg/core.js'] %}
+	<script src="{{ path('resource:js', { file: file }) }}" type="application/javascript" charset="utf-8"></script>
+	{% endfor %}
+{% endblock %}
+
+{% block menu %}
+	{% set activItem = 'rpg' %}
+	{{ parent() }}
+{% endblock %}
