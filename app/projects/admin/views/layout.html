@@ -4,7 +4,7 @@
 	{% block head %}
 		<meta content="UTF-8"/>
 		<title>{% block title %}{{ [pageTitle|default('Strona'), app.projectName]|join(' - ') }}{% endblock %}</title>
-		{% for file in ['css/admin.css'] %}
+		{% for file in ['css/admin.css', 'css/vis.css'] %}
 		<link rel="stylesheet" href="{{ path('resource:css', { file: file }) }}" type="text/css" media="screen">
 		{% endfor %}
 	{% endblock %}
@@ -99,7 +99,7 @@
 	</div>
 	{% endblock %}
 	{% block bottomScripts %}
-		{% for file in ['js/jquery/jquery.js', 'js/tinymce/tinymce.min.js', 'js/bootstrap.js', 'js/core.js'] %}
+		{% for file in ['js/jquery/jquery.js', 'js/tinymce/tinymce.min.js', 'js/bootstrap.js', 'js/core.js', 'js/vis.js'] %}
 		<script src="{{ path('resource:js', { file: file }) }}" type="application/javascript" charset="utf-8"></script>
 		{% endfor %}
 	{% endblock %}

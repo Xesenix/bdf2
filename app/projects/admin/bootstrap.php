@@ -65,6 +65,7 @@ $app['resources.assets.resource_dir'] = $app->share($app->extend('resources.asse
 	$paths[] = __DIR__ . '/../../../vendor/resources/jquery-ui';
 	$paths[] = __DIR__ . '/../../../vendor/resources/tinymce';
 	$paths[] = __DIR__ . '/../../../vendor/resources/bootstrap';
+	$paths[] = __DIR__ . '/../../../vendor/resources/vis';
 	$paths[] = __DIR__ . '/../../resources';
 	$paths[] = __DIR__ . '/resources';
 	
@@ -92,6 +93,16 @@ $app['resources.assets.compositions'] = $app->share($app->extend('resources.asse
 	
 	$compositions['js/bootstrap.js'] = array(
 		'js/bootstrap.min.js',
+	);
+	
+	// can be used as alias to file in resources path
+	$compositions['js/vis.js'] = array(
+		'dist/vis.min.js',
+	);
+	
+	// can be used as alias to file in resources path
+	$compositions['css/vis.css'] = array(
+		'dist/vis.css',
 	);
 	
 	return $compositions;
