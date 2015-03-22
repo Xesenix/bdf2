@@ -1,0 +1,7 @@
+<div>
+	<h1>Mapa</h1>
+	<p>Znajdujesz się [[ map.location.miejscownik ]], możesz przejść do:</p>
+	<div class="list-group">
+		<a data-ng-repeat="item in map.locations" class="list-group-item" href="#[[ item.route ]]" data-ng-class="{disabled: activeRoute(item.route)}">[[item.moveToLabel]]</a>
+	</div>
+</div>

@@ -1,0 +1,21 @@
+<h1>Inwentarz</h1>
+<p class="lead">Parsowanie plików CSV z pomocą Papa Parse.</p>
+<div class="thumbnail">
+	<table class="table">
+		<thead>
+			<tr>
+				<th data-ng-repeat="(column, value) in inventory.data[0]">
+					[[ column ]]
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-ng-repeat="row in inventory.data">
+				<td data-ng-repeat="(column, value) in row">
+					[[ value ]]
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<pre>[[ label ]]</pre>

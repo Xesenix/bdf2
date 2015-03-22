@@ -1,14 +1,18 @@
+{%- block html -%}
+{%- block doctype -%}
 <!doctype html>
+{%- endblock -%}
 <html lang="pl">
+{% block head %}
 <head>
-	{% block head %}
-		<meta content="UTF-8"/>
-		<title>{% block title %}{{ [pageTitle, app.projectName]|join(' - ') }}{% endblock %}</title>
-		{% for file in ['css/page.css'] %}
-		<link rel="stylesheet" href="{{ path('resource:css', { file: file }) }}" type="text/css" media="screen">
-		{% endfor %}
-	{% endblock %}
+	<meta content="UTF-8"/>
+	<title>{% block title %}{{ [pageTitle, app.projectName]|join(' - ') }}{% endblock %}</title>
+	{% for file in ['css/page.css'] %}
+	<link rel="stylesheet" href="{{ path('resource:css', { file: file }) }}" type="text/css" media="screen">
+	{% endfor %}
 </head>
+{% endblock %}
+{% block body %}
 <body>
 	{% block navigation %}
 	<nav class="navbar navbar-inverse navbar-fixed-top">
@@ -25,7 +29,7 @@
 			<div id="navbar" class="collapse navbar-collapse">
 				{% block menu %}
 				<ul class="nav navbar-nav">
-					{% for item in [{'route': 'articles', 'label': 'Artykuły'}, {'route': 'rpg', 'label': 'RPG'}] %}
+					{% for item in [{'route': 'articles', 'label': 'Artykuły'}, {'route': 'rpg', 'label': 'Angular JS test'}] %}
 					<li{% if app.request.get('_route') == item.route or activItem is defined and activItem == item.route %} class="active"{% endif %}><a href="{{ url(item.route) }}">{{ item.label }}</a></li>
 					{% endfor %}
 				</ul>
@@ -71,4 +75,6 @@
 		{% endfor %}
 	{% endblock %}
 </body>
+{%- endblock -%}
 </html>
+{%- endblock -%}

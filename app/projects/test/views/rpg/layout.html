@@ -1,14 +1,17 @@
 {% extends "layout.html" %}
 
-{% block head %}
+{%- block head -%}
+<head>
 	<title>RPG</title>
-	{% for file in ['css/rpg.css'] %}
+	{% for file in ['css/page.css', 'rpg/css/rpg.css'] %}
 	<link rel="stylesheet" href="{{ path('resource:css', { file: file }) }}" type="text/css" media="screen">
 	{% endfor %}
-{% endblock %}
+</head>
+{%- endblock -%}
 
 {% block bottomScripts %}
-	{% for file in ['js/rpg/core.js'] %}
+	{{ parent() }}
+	{% for file in ['rpg/core.js', 'rpg/js/rpg.js'] %}
 	<script src="{{ path('resource:js', { file: file }) }}" type="application/javascript" charset="utf-8"></script>
 	{% endfor %}
 {% endblock %}
