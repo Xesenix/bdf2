@@ -14,60 +14,60 @@
 	margin-bottom: 5px;
 }
 
-.text-left-xs {
+.text-xs-left {
 	text-align: left !important;
 }
-.text-right-xs {
+.text-xs-right {
 	text-align: right !important;
 }
-.text-center-xs {
+.text-xs-center {
 	text-align: center !important;
 }
-.text-justify-xs {
+.text-xs-justify {
 	text-align: justify !important;
 }
 
 @media (min-width: 768px) {
-	.text-left-sm {
+	.text-sm-left {
 		text-align: left !important;
 	}
-	.text-right-sm {
+	.text-sm-right {
 		text-align: right !important;
 	}
-	.text-center-sm {
+	.text-sm-center {
 		text-align: center !important;
 	}
-	.text-justify-sm {
+	.text-sm-justify {
 		text-align: justify !important;
 	}
 }
 
 @media (min-width: 992px) {
-	.text-left-md {
+	.text-md-left {
 		text-align: left !important;
 	}
-	.text-right-md {
+	.text-md-right {
 		text-align: right !important;
 	}
-	.text-center-md {
+	.text-md-center {
 		text-align: center !important;
 	}
-	.text-justify-md {
+	.text-md-justify {
 		text-align: justify !important;
 	}
 }
 
 @media (min-width: 1200px) {
-	.text-left-lg {
+	.text-lg-left {
 		text-align: left !important;
 	}
-	.text-right-lg {
+	.text-lg-right {
 		text-align: right !important;
 	}
-	.text-center-lg {
+	.text-lg-center {
 		text-align: center !important;
 	}
-	.text-justify-lg {
+	.text-lg-justify {
 		text-align: justify !important;
 	}
 }

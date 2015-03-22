@@ -123,6 +123,8 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 			'form' => array(
 				'login_path' => '/login',
 				'check_path' => '/admin/login_check',
+				'default_target_path' => '/dashboard',
+				'always_use_default_target_path' => true,
 			),
 			'users' => include 'config/users.php',
 			'logout' => array(
@@ -177,3 +179,9 @@ $app['helpers.avatar.provider'] = $app->share($app->extend('helpers.avatar.provi
 }));
 
 //$app['twig']->addGlobal('message', 'Test');
+
+$app->match('/dashboard', function() use($app) {
+	return $app['twig']->render('dashboard.html', array(
+		'pageTitle' => 'Panel administracyjnya',
+	));
+});

@@ -15,7 +15,7 @@
 		<div class="wrapper container-fluid">
 			<div class="row">
 				{% block heroContent %}
-					{% if app.security.token.user %}
+					{% if is_granted('IS_AUTHENTICATED_FULLY') %}
 					<div class="pull-right">
 						<img class="" src="{{ avatar(app.security.token.user.username, 100) }}"/>
 					</div>
@@ -31,40 +31,38 @@
 	</div>
 	{% endblock %}
 	{% block navigation %}
-	<div class="top-bar">
-		<div class="wrapper container-fluid">
-			<div class="row">
-				<nav class="col-xs-12">
+	<nav class="navbar navbar-inverse top-bar">
+		<div class="container-fluid">
+			<ul class="nav navbar-nav">
+				{% if is_granted('ROLE_ADMIN') %}
+				<li>
+					<a href="{{ url('widget:admin:widget:list') }}">Wihajstry</a>
+				</li>
+				<li class="dropdown btn-group">
+					<a class="btn" href="{{ url('article_admin:list') }}">Artykuły</a>
 					
-					<ul class="nav nav-pills">
-						{% if is_granted('ROLE_ADMIN') %}
-						<li>
-							<a href="{{ url('widget:admin:widget:list') }}">Wihajstry</a>
-						</li>
-						<li class="btn-group">
-							<a class="btn" href="{{ url('article_admin:list') }}">Artykuły</a>
-							
-							<button class="btn dropdown-toggle" type="button" data-toggle="dropdown"><span class="caret"></span></button>
-							
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="{{ url('article_admin:add') }}">Dodaj</a></li>
-							</ul>
-						</li>
-						<li>
-							<a href="{{ url('navigation:admin:menu:list') }}">Menu</a>
-						</li>
-						{% endif %}
-						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
-						<li class="pull-right">
-							<a href="{{ url('logout') }}">Logout</a>
-						</li>
-						{% endif %}
+					<a class="dropdown-toggle btn" data-toggle="dropdown"><span class="caret"></span></a>
+					
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="{{ url('article_admin:add') }}">Dodaj</a></li>
 					</ul>
-				</nav>
-				{{ render(url('widget:position', { position: 'topbar'})) }}
-			</div>
+				</li>
+				<li>
+					<a href="{{ url('navigation:admin:menu:list') }}">Menu</a>
+				</li>
+				{% endif %}
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				<li>
+					<a href="{{ url('logout') }}">Logout</a>
+				</li>
+				{% endif %}
+			</ul>
+			
+			{{ render(url('widget:position', { position: 'topbar'})) }}
 		</div>	
-	</div>
+	</nav>
 	{% endblock %}
 	{% block main %}
 	<div class="main">
