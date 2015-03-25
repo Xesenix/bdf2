@@ -1,4 +1,12 @@
-<div>
-	<h1>Umiejetnosci</h1>
-	<pre>[[ label ]]</pre>
+
+<h1>Umiejetnosci</h1>
+
+<div data-ng-repeat="(skillKey, skill) in profil.skills">
+	<strong>[[ skill.name ]]:</strong>[[ skill.pointsUsed ]]
+	<button class="btn btn-default" data-ng-click="profil.addSkillPoint(skill.key, clickModifier($event))" data-ng-class="{'btn-primary': profil.avaibleSkillPoints()}">+</button>
+	<button class="btn btn-default" data-ng-click="profil.removeSkillPoint(skill.key, clickModifier($event))" data-ng-class="{'btn-primary': skill.pointsUsed > 0}">-</button>
+	<div data-ng-include data-src="skill.descriptionTemplate"></div>
+	<div data-ng-include data-src="skill.progressTemplate"></div>
 </div>
+
+<pre>[[ label ]]</pre>

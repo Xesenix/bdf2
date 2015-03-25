@@ -126,6 +126,7 @@ $app['resources.assets.compositions'] = $app->share($app->extend('resources.asse
 	//	'angular-hints-log' => 'js/hint-log.js',
 	//	'angular-hints' => 'js/hint.js',
 		'js/angular-route.js',
+		'js/angular-sanitize.js',
 		'js/papaparse.js',
 	);
 	

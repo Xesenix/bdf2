@@ -21,7 +21,7 @@
 		<div class="list-group">
 			<a data-ng-repeat="item in tabs" href="#[[ item.route() ]]" class="list-group-item" data-ng-class="{active: activeRoute(item.route())}">
 				<span class="list-group-item-heading">[[ item.label ]]</span>
-				<span class="badge">[[ item.badge ]]</span>
+				<span class="badge" data-ng-bind="[[ item.badge ]]"></span>
 			</a>
 		</div>
 	</div>
