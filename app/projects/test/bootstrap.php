@@ -25,6 +25,13 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
 
 $app->register(new BDF2\ORM\Provider\ORMServiceProvider());
 
+// --- Controller ---
+
+$app->register(new Silex\Provider\HttpCacheServiceProvider(), array(
+	'http_cache.cache_dir' => __DIR__ . '/cache/',
+	'http_cache.esi' => null,
+));
+
 // --- View ---
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
