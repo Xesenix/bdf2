@@ -1,12 +1,41 @@
+<form class="form-inline row">
+	<div class="form-group pull-right">
+		<div class="input-group">
+			<label for="filterName" class="input-group-addon">Filtruj po nazwie:</label>
+			<input id="filterName" type="search" class="form-control" data-ng-model="search.name"/>
+			<label for="sortName" class="input-group-addon">Sortowanie po:</label>
+			<select id="sortName" class="form-control" data-ng-model="sortName" data-ng-init="sortName = 'name'">
+				<option value="name">nazwa</option>
+				<option value="pointsUsed">poziom</option>
+			</select>
+			<span class="input-group-addon btn" data-ng-click="sortOrder = !sortOrder">
+				<span class="glyphicon" data-ng-class="{'glyphicon-sort-by-alphabet': !sortOrder, 'glyphicon-sort-by-alphabet-alt': sortOrder}"></span>
+			</span>
+			<span class="input-group-addon btn" data-ng-click="profil.confirmSkillPoints()" data-ng-class="{'btn-primary': profil.unconfirmedSkillPoints() > 0}">
+				<span class="glyphicon glyphicon-ok"></span>
+			</span>
+			<span class="input-group-addon btn" data-ng-click="profil.resetSkillPoints()" data-ng-class="{'btn-danger': profil.unconfirmedSkillPoints() > 0}">
+				<span class="glyphicon glyphicon-remove"></span>
+			</span>
+		</div>
+	</div>
+</form>
 
-<h1>Umiejetnosci</h1>
-
-<div data-ng-repeat="(skillKey, skill) in profil.skills">
-	<strong>[[ skill.name ]]:</strong>[[ skill.pointsUsed ]]
-	<button class="btn btn-default" data-ng-click="profil.addSkillPoint(skill.key, clickModifier($event))" data-ng-class="{'btn-primary': profil.avaibleSkillPoints()}">+</button>
-	<button class="btn btn-default" data-ng-click="profil.removeSkillPoint(skill.key, clickModifier($event))" data-ng-class="{'btn-primary': skill.pointsUsed > 0}">-</button>
-	<div data-ng-include data-src="skill.descriptionTemplate"></div>
-	<div data-ng-include data-src="skill.progressTemplate"></div>
+<div data-ng-repeat="(skillKey, skill) in profil.skills | filterObjectBy:search | orderObjectBy:sortName:sortOrder" class="row">
+	<h2 class="col-xs-12 text-center">[[ skill.name ]] [[ skill.lvl() ]]</h2>
+	
+	<div class="pull-right">
+		<div class="btn-group">
+			<button class="btn btn-default" title="Wciśnij z ctrl (x5) z shift (x50)" data-ng-click="profil.addSkillPoint(skill.key, clickModifier($event))" data-ng-class="{'btn-primary': profil.avaibleSkillPoints()}"><span class="glyphicon glyphicon-plus"></span></button>
+			<button class="btn btn-default" title="Wciśnij z ctrl (x5) z shift (x50)" data-ng-click="profil.removeSkillPoint(skill.key, clickModifier($event))" data-ng-class="{'btn-primary': skill.pointsUsed > skill.pointsConfirmed}"><span class="glyphicon glyphicon-minus"></span></button>
+			<button class="btn btn-default" data-ng-click="profil.confirmSkillPoint(skill.key)" data-ng-class="{'btn-success': skill.pointsUsed - skill.pointsConfirmed > 0}"><span class="glyphicon glyphicon-ok"></span></button>
+			<button class="btn btn-default" data-ng-click="profil.resetSkillPoint(skill.key)" data-ng-class="{'btn-danger': skill.pointsUsed - skill.pointsConfirmed > 0}"><span class="glyphicon glyphicon-remove"></span></button>
+		</div>
+	</div>
+	<hr class="col-xs-12">
+	
+	<div class="col-xs-12" data-ng-include data-src="skill.descriptionTemplate"></div>
+	<div class="col-xs-12" data-ng-include data-src="skill.progressTemplate"></div>
+	
+	<hr class="col-xs-12">
 </div>
-
-<pre>[[ label ]]</pre>

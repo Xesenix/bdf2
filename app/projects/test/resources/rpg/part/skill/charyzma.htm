@@ -1,0 +1,9 @@
+<blockquote class="text-center" data-ng-bind-html="skill.description()"></blockquote>
+<p>
+	Opisuje jaki wpływ potrafisz wywrzeć na towarzyszach i osobach postronnych.<br>
+	Modyfikuje wynik interakcji z różnymi postaciami, dodaje dodatkowe możliwości rozwiązywania sytuacji w których się znajdziesz podczas podróżowania.
+	Pamiętaj, że zbyt wielka sława może stać się przekleństwem w pewnych sytuacjach.
+</p>
+<p data-ng-if="skill.description() != skill.description(skill.lvl() + 1)">
+	<strong>Następny poziom:</strong> <em>[[ skill.description(skill.lvl() + 1) ]]</em>
+</p>

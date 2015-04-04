@@ -34,11 +34,11 @@
 				return 0;
 			}
 			
-			var i = 0, len = collection.length, suma = 0;
+			var suma = 0;
 			
-			for (; i < len; i++) {
-				suma += collection[i][propertyName];
-			}
+			angular.forEach(collection, function (skill, index) {
+				suma += skill[propertyName];
+			});
 			
 			return suma;
 		}
@@ -49,6 +49,45 @@
 			return collection.length;
 		}
 	});
+	
+	rpgApp.filter('orderObjectBy', function() {
+		return function(items, field, reverse) {
+			var filtered = [];
+			angular.forEach(items, function(item) {
+				filtered.push(item);
+			});
+			
+			filtered.sort(function (a, b) {
+				return (a[field] > b[field] ? 1 : -1);
+			});
+			
+			if (reverse)
+			{
+				filtered.reverse();
+			}
+			
+			return filtered;
+		};
+	});
+	
+	rpgApp.filter('filterObjectBy', ['$filter', function($filter) {
+		var filter = $filter('filter');
+		
+		return function(map, expression, comparator) {
+			if (!expression) {
+				return map;
+			}
+			
+			var result = {};
+			angular.forEach(map, function(data, index) {
+				if (filter([data], expression, comparator).length) {
+					result[index] = data;
+				}
+			});
+			
+			return result;
+		}
+	}]);
 	
 	rpgApp.factory('inventoryFactory', ['$http', function($http){
 		var url = 'resources/rpg/data/inventory.csv';
@@ -66,7 +105,10 @@
 	
 	rpgApp.factory('skillsFactory', ['$q', '$interpolate', function($q, $interpolate) {
 		var skillPrototype = {
-			progressTemplate: 'resources/rpg/part/skill/progress.htm',
+			progressTemplate: 'resources/rpg/part/skill/postep.htm',
+			pointsUsed: 0,
+			pointsConfirmed: 0,
+			maxLvl: 10,
 			lvl: function() {
 				return Math.floor(Math.sqrt(this.pointsUsed));
 			},
@@ -94,20 +136,81 @@
 		};
 		
 		var skills = {
-			search: angular.extend(angular.copy(skillPrototype), {
-				key: 'search',
-				name: 'Przeszukiwanie',
-				descriptionTemplate: 'resources/rpg/part/skill/search.htm'
+			percepcja: angular.extend(angular.copy(skillPrototype), {
+				key: 'percepcja',
+				name: 'Percepcja',
+				descriptionTemplate: 'resources/rpg/part/skill/percepcja.htm',
+				description: function(lvl) {
+					if (typeof lvl == 'undefined')
+					{
+						lvl = this.lvl();
+					}
+					
+					if (lvl < 3)
+					{
+						return 'Jesteś ślepy jak kret lepiej nie wyłaź z swojej nory bo jeszcze pod coś wpadniesz.';
+					}
+					
+					if (lvl < 5)
+					{
+						return 'W zasadzie nie odbiegasz od normy tylko ta luneta sprawia, że ludzie dziwnie się na ciebie patrzą gdy sie rozglądasz.';
+					}
+					
+					if (lvl < 7)
+					{
+						return 'Klucze już nigdy nie zagonią cię do zaciekłych poszukiwań.';
+					}
+					
+					if (lvl < 9)
+					{
+						return 'Sokole oczy twój wzrok podróżuje we wszystkich kierunkach,<br>trudno stwierdzić czy&nbsp;to&nbsp;dobrze, czy&nbsp;źle.';
+					}
+					
+					return 'Żadna zasłona nie przesłoni twego pola widzenia. Sąsiedzi sądzą, że już powinieneś skończyć z tym przesiadywaniem w oknie z lornetką.';
+				}
 			}),
-			diplomacy: angular.extend(angular.copy(skillPrototype), {
-				key: 'diplomacy',
-				name: 'Dyplomacja',
-				description: ''
+			charyzma: angular.extend(angular.copy(skillPrototype), {
+				key: 'charyzma',
+				name: 'Charyzma',
+				descriptionTemplate: 'resources/rpg/part/skill/charyzma.htm',
+				description: function(lvl) {
+					if (typeof lvl == 'undefined')
+					{
+						lvl = this.lvl();
+					}
+					
+					if (lvl < 3)
+					{
+						return 'Kompletnie o siebie nie dbasz nawet szczury uciekają na twój widok.<br>Nikt się do ciebie nie odezwie z własnej woli.';
+					}
+					
+					if (lvl < 5)
+					{
+						return 'Wyglądasz dość przeciętnie nie robisz na nikim specjalnego wrażenia.';
+					}
+					
+					if (lvl < 8)
+					{
+						return 'Dbasz o siebie potrafisz poprowadzić ciekawą konwersację jesteś w stanie przekonać do działania mniej pewne siebie osoby.';
+					}
+					
+					return 'Jesteś prawdziwą duszą towarzystwa wszyscy za tobą szaleją, wielu oddało by życie za ciebie.';
+				}
 			}),
-			theft: angular.extend(angular.copy(skillPrototype), {
-				key: 'theft',
-				name: 'Kradzież',
-				description: ''
+			zrecznosc: angular.extend(angular.copy(skillPrototype), {
+				key: 'zrecznosc',
+				name: 'Zręczność',
+				descriptionTemplate: 'resources/rpg/part/skill/zrecznosc.htm'
+			}),
+			wiedza: angular.extend(angular.copy(skillPrototype), {
+				key: 'wiedza',
+				name: 'Wiedza',
+				descriptionTemplate: 'resources/rpg/part/skill/wiedza.htm'
+			}),
+			inteligencja: angular.extend(angular.copy(skillPrototype), {
+				key: 'inteligencja',
+				name: 'Inteligencja',
+				descriptionTemplate: 'resources/rpg/part/skill/inteligencja.htm'
 			})
 		}
 		
@@ -148,14 +251,32 @@
 					multiply = 1;
 				}
 				
-				var diff = Math.min(multiply, profil.skills[skillKey].pointsUsed);
+				var diff = Math.min(multiply, profil.skills[skillKey].pointsUsed - profil.skills[skillKey].pointsConfirmed);
 				
 				profil.skills[skillKey].pointsUsed -= diff;
 				profil.skillsPoints += diff;
 				
 			},
-			avaibleSkillPoints: function() {
-				return profil.skillsPoints - $filter('aggSum')('pointsUsed', profil.skills);
+			confirmSkillPoint: function(skillKey) {
+				profil.skills[skillKey].pointsConfirmed = profil.skills[skillKey].pointsUsed;
+			},
+			confirmSkillPoints: function() {
+				angular.forEach(profil.skills, function (skill, skillName) {
+					profil.confirmSkillPoint(skillName);
+				});
+			},
+			resetSkillPoint: function(skillKey) {
+				profil.skillsPoints += profil.skills[skillKey].pointsUsed - profil.skills[skillKey].pointsConfirmed;
+				profil.skills[skillKey].pointsUsed = profil.skills[skillKey].pointsConfirmed;
+			},
+			resetSkillPoints: function() {
+				angular.forEach(profil.skills, function (skill, skillName) {
+					profil.resetSkillPoint(skillName);
+				});
+			},
+			unconfirmedSkillPoints: function() {
+				console.log('pointsUsed', $filter('aggSum')('pointsUsed', profil.skills));
+				return $filter('aggSum')('pointsUsed', profil.skills) - $filter('aggSum')('pointsConfirmed', profil.skills);
 			}
 		};
 		
@@ -201,7 +322,7 @@
 			route: function() {
 				return '/umiejetnosci';
 			},
-			badge: 'profil.avaibleSkillPoints()'
+			badge: "'+' + profil.skillsPoints"
 		}, {
 			label: 'Inwentarz',
 			route: function() {

@@ -1,0 +1,6 @@
+<p class="text-center" data-ng-if="[[skill.maxLvl > skill.lvl()]]">
+	<abbr title="Wykorzystane punkty umiejętności / wymagane punkty do osiągnięcia kolejnego poziomu">[[ skill.pointsUsed - skill.lvlRequired() ]]/[[ skill.lvlRequired(skill.lvl()+1) - skill.lvlRequired() ]] punkty</abbr>
+</p>
+<div class="progress">
+	<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" style="width: [[100 * (skill.pointsUsed - skill.lvlRequired()) / (skill.lvlRequired(skill.lvl()+1) - skill.lvlRequired())]]%"></div>
+</div>
