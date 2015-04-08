@@ -128,7 +128,7 @@
 		"xesenix/bdf2-library": "dev-master",
 		"resources/jquery": "1.11.*",
 		"resources/jquery-ui": "1.11.*",
-		"resources/bootstrap": "3.2.*",
+		"resources/bootstrap": "3.3.*",
 		"resources/tinymce": "4.*",
 		"resources/vis": "3.11.*",
 		"resources/require": "2.1.*",
